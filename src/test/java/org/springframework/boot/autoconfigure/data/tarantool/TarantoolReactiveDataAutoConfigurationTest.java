@@ -14,7 +14,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TarantoolReactiveDataAutoConfigurationTest {
 
     private final ApplicationContextRunner contextRunner = new ApplicationContextRunner()
-            .withConfiguration(AutoConfigurations.of(TarantoolAutoConfiguration.class, TarantoolReactiveDataAutoConfiguration.class));
+            .withConfiguration(AutoConfigurations.of(TarantoolAutoConfiguration.class, TarantoolConversionAutoConfiguration.class,
+                    TarantoolReactiveDataAutoConfiguration.class));
 
     @Test
     void shouldCreateTemplate() {

@@ -27,7 +27,7 @@ import org.springframework.data.tarantool.core.convert.TarantoolConverter;
 @ConditionalOnClass({TarantoolClient.class, TarantoolTemplate.class})
 @ConditionalOnBean(TarantoolClient.class)
 @Import(TarantoolDataConfiguration.class)
-@AutoConfigureAfter(TarantoolAutoConfiguration.class)
+@AutoConfigureAfter({TarantoolAutoConfiguration.class, TarantoolConversionAutoConfiguration.class})
 public class TarantoolDataAutoConfiguration {
 
     @Bean

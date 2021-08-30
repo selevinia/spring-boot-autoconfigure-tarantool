@@ -28,7 +28,7 @@ import reactor.core.publisher.Flux;
 @ConditionalOnClass({TarantoolClient.class, ReactiveTarantoolTemplate.class, Flux.class})
 @ConditionalOnBean(TarantoolClient.class)
 @Import(TarantoolDataConfiguration.class)
-@AutoConfigureAfter(TarantoolAutoConfiguration.class)
+@AutoConfigureAfter({TarantoolAutoConfiguration.class, TarantoolConversionAutoConfiguration.class})
 public class TarantoolReactiveDataAutoConfiguration {
 
     @Bean
