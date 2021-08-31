@@ -59,6 +59,9 @@ public class TarantoolCacheAutoConfiguration {
         if (!cacheNames.isEmpty()) {
             builder.initialCacheNames(new LinkedHashSet<>(cacheNames));
         }
+        if (cacheProperties.isEnableStatistics()) {
+            builder.enableStatistics();
+        }
         tarantoolCacheManagerBuilderCustomizers.orderedStream().forEach((customizer) -> customizer.customize(builder));
         return cacheManagerCustomizers.customize(builder.build());
     }

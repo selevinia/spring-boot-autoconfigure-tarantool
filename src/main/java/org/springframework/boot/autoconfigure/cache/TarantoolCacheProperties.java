@@ -21,25 +21,30 @@ public class TarantoolCacheProperties {
 
     /**
      * Comma-separated list of cache names to create if supported by the underlying cache
-     * manager. Usually, this disables the ability to create additional caches on-the-fly.
+     * manager. Usually, this disables the ability to create additional caches on-the-fly
      */
     private List<String> cacheNames = new ArrayList<>();
 
     /**
-     * Cache name prefix.
+     * Cache name prefix
      */
     private String cacheNamePrefix;
 
     /**
-     * Allow caching null values.
+     * Allow caching null values
      */
     private boolean cacheNullValues = true;
 
     /**
      * Entry expiration. By default, the entries never expire.
-     * If a duration suffix is not specified, milliseconds will be used.
+     * If a duration suffix is not specified, milliseconds will be used
      */
     private Duration timeToLive;
+
+    /**
+     * Enable cache statistics
+     */
+    private boolean enableStatistics = false;
 
     public boolean isEnabled() {
         return enabled;
@@ -79,5 +84,13 @@ public class TarantoolCacheProperties {
 
     public void setTimeToLive(Duration timeToLive) {
         this.timeToLive = timeToLive;
+    }
+
+    public boolean isEnableStatistics() {
+        return enableStatistics;
+    }
+
+    public void setEnableStatistics(boolean enableStatistics) {
+        this.enableStatistics = enableStatistics;
     }
 }
