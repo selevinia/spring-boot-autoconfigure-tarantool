@@ -4,6 +4,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.domain.EntityScanner;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,6 +28,7 @@ import java.util.Collections;
  * @author Tatiana Blinova
  */
 @Configuration(proxyBeanMethods = false)
+@EnableConfigurationProperties(TarantoolProperties.class)
 public class TarantoolConversionAutoConfiguration {
 
     @Bean
