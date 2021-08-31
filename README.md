@@ -1,11 +1,11 @@
 # Spring boot Autoconfigure for using Tarantool database and Spring Data Tarantool
 
 This project provides Spring Boot auto-configurations that allow you to work with Tarantool database in your Spring Boot
-applications in synchronous style.
+applications.
 
 ## How to use in your project
 
-To add the starter to a Maven-based project, add the following dependency:
+To add Spring Boot Tarantool Autoconfigure to a Maven-based project, add the following dependency:
 
 ```maven
 <dependencies>
@@ -48,13 +48,19 @@ It's possible to override the default properties listed here below.
 | spring.data.tarantool.proxy-operations.update-function-name       | crud.update | API function name for performing the update operation |
 | spring.data.tarantool.proxy-operations.upsert-function-name       | crud.upsert | API function name for performing the upsert operation |
 | spring.data.tarantool.proxy-operations.select-function-name       | crud.select | API function name for performing the select operation |
+| selevinia.cache.tarantool.enabled                                 | false | Enable Tarantool cache |
+| selevinia.cache.tarantool.cache-names                             |  | Comma-separated list of cache names to create if supported by the underlying cache manager. Usually, this disables the ability to create additional caches on-the-fly |
+| selevinia.cache.tarantool.cache-name-prefix                       |  | Cache name prefix |
+| selevinia.cache.tarantool.cache-null-values                       |  | Allow caching null values |
+| selevinia.cache.tarantool.time-to-live                            |  | Entry expiration. By default, the entries never expire. If a duration suffix is not specified, milliseconds will be used |
 
 ## Learn more
 
 - [Spring Data Tarantool](https://github.com/selevinia/spring-data-tarantool)
+- [Spring Boot Cache Tarantool Starter](https://github.com/selevinia/spring-boot-starter-cache-tarantool)
 - [Spring Boot Data Tarantool Starter](https://github.com/selevinia/spring-boot-starter-data-tarantool)
 - [Reactive Spring Boot Data Tarantool Starter](https://github.com/selevinia/spring-boot-starter-data-tarantool-reactive)
 
 ## License
 
-This project is Open Source software released under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
+This project is Open Source software released under the [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0)
