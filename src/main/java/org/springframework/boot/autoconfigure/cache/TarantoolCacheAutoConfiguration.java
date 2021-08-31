@@ -5,6 +5,7 @@ import io.tarantool.driver.api.TarantoolResult;
 import io.tarantool.driver.api.tuple.TarantoolTuple;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -34,6 +35,7 @@ import java.util.stream.Collectors;
 @ConditionalOnProperty(prefix = "selevinia.cache.tarantool", name = "enabled", havingValue = "true")
 @ConditionalOnClass({TarantoolClient.class, TarantoolConverter.class})
 @ConditionalOnBean({TarantoolClient.class, TarantoolConverter.class})
+@AutoConfigureBefore(CacheAutoConfiguration.class)
 @AutoConfigureAfter({TarantoolAutoConfiguration.class, TarantoolConversionAutoConfiguration.class})
 public class TarantoolCacheAutoConfiguration {
 
