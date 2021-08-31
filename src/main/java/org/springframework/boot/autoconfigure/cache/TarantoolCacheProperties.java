@@ -11,8 +11,13 @@ import java.util.List;
  *
  * @author Tatiana Blinova
  */
-@ConfigurationProperties(prefix = "selevinia.cache")
+@ConfigurationProperties(prefix = "selevinia.cache.tarantool")
 public class TarantoolCacheProperties {
+
+    /**
+     * Enable Tarantool cache
+     */
+    private boolean enabled = false;
 
     /**
      * Comma-separated list of cache names to create if supported by the underlying cache
@@ -20,7 +25,29 @@ public class TarantoolCacheProperties {
      */
     private List<String> cacheNames = new ArrayList<>();
 
-    private final Tarantool tarantool = new Tarantool();
+    /**
+     * Cache name prefix.
+     */
+    private String cacheNamePrefix;
+
+    /**
+     * Allow caching null values.
+     */
+    private boolean cacheNullValues = true;
+
+    /**
+     * Entry expiration. By default, the entries never expire.
+     * If a duration suffix is not specified, milliseconds will be used.
+     */
+    private Duration timeToLive;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public List<String> getCacheNames() {
         return cacheNames;
@@ -30,50 +57,27 @@ public class TarantoolCacheProperties {
         this.cacheNames = cacheNames;
     }
 
-    public Tarantool getTarantool() {
-        return tarantool;
+    public String getCacheNamePrefix() {
+        return cacheNamePrefix;
     }
 
-    public static class Tarantool {
+    public void setCacheNamePrefix(String cacheNamePrefix) {
+        this.cacheNamePrefix = cacheNamePrefix;
+    }
 
-        /**
-         * Entry expiration. By default, the entries never expire.
-         * If a duration suffix is not specified, milliseconds will be used.
-         */
-        private Duration timeToLive;
+    public boolean isCacheNullValues() {
+        return cacheNullValues;
+    }
 
-        /**
-         * Allow caching null values.
-         */
-        private boolean cacheNullValues = true;
+    public void setCacheNullValues(boolean cacheNullValues) {
+        this.cacheNullValues = cacheNullValues;
+    }
 
-        /**
-         * Cache name prefix.
-         */
-        private String cacheNamePrefix;
+    public Duration getTimeToLive() {
+        return timeToLive;
+    }
 
-        public Duration getTimeToLive() {
-            return timeToLive;
-        }
-
-        public void setTimeToLive(Duration timeToLive) {
-            this.timeToLive = timeToLive;
-        }
-
-        public boolean isCacheNullValues() {
-            return cacheNullValues;
-        }
-
-        public void setCacheNullValues(boolean cacheNullValues) {
-            this.cacheNullValues = cacheNullValues;
-        }
-
-        public String getCacheNamePrefix() {
-            return cacheNamePrefix;
-        }
-
-        public void setCacheNamePrefix(String cacheNamePrefix) {
-            this.cacheNamePrefix = cacheNamePrefix;
-        }
+    public void setTimeToLive(Duration timeToLive) {
+        this.timeToLive = timeToLive;
     }
 }

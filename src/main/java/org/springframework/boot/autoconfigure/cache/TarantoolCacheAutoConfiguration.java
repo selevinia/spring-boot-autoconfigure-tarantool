@@ -9,12 +9,12 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.tarantool.TarantoolAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.tarantool.TarantoolConversionAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.tarantool.cache.TarantoolCacheConfiguration;
 import org.springframework.data.tarantool.cache.TarantoolCacheManager;
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  */
 @Configuration(proxyBeanMethods = false)
 @EnableConfigurationProperties(TarantoolCacheProperties.class)
-@Conditional(CacheCondition.class) // todo
+@ConditionalOnProperty(prefix = "selevinia.cache.tarantool", name = "enabled", havingValue = "true")
 @ConditionalOnClass({TarantoolClient.class, TarantoolConverter.class})
 @ConditionalOnBean({TarantoolClient.class, TarantoolConverter.class})
 @AutoConfigureAfter({TarantoolAutoConfiguration.class, TarantoolConversionAutoConfiguration.class})
@@ -68,14 +68,14 @@ public class TarantoolCacheAutoConfiguration {
 
     private TarantoolCacheConfiguration createConfiguration(TarantoolCacheProperties cacheProperties) {
         TarantoolCacheConfiguration config = TarantoolCacheConfiguration.defaultCacheConfig();
-        if (cacheProperties.getTarantool().getTimeToLive() != null) {
-            config = config.entryTtl(cacheProperties.getTarantool().getTimeToLive());
+        if (cacheProperties.getTimeToLive() != null) {
+            config = config.entryTtl(cacheProperties.getTimeToLive());
         }
-        if (!cacheProperties.getTarantool().isCacheNullValues()) {
+        if (!cacheProperties.isCacheNullValues()) {
             config = config.disableCachingNullValues();
         }
-        if (cacheProperties.getTarantool().getCacheNamePrefix() != null) {
-            config = config.prefixCacheNameWith(cacheProperties.getTarantool().getCacheNamePrefix());
+        if (cacheProperties.getCacheNamePrefix() != null) {
+            config = config.prefixCacheNameWith(cacheProperties.getCacheNamePrefix());
         }
         return config;
     }
