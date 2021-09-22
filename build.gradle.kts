@@ -1,5 +1,5 @@
 group = "io.github.selevinia"
-version = "0.3.1"
+version = "0.3.2"
 description = "Spring Boot Autoconfigure for Tarantool Database"
 
 plugins {
@@ -21,7 +21,7 @@ configure<JavaPluginConvention> {
 dependencies {
     api("org.springframework.boot:spring-boot-autoconfigure:2.5.2")
 
-    compileOnly("io.github.selevinia:spring-data-tarantool:0.3.1")
+    compileOnly("io.github.selevinia:spring-data-tarantool:0.3.2")
     compileOnly("io.tarantool:cartridge-driver:0.4.3")
     compileOnly("io.projectreactor:reactor-core:3.4.7")
 
@@ -31,7 +31,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.2")
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
     testImplementation("org.assertj:assertj-core:3.20.2")
-    testImplementation("io.github.selevinia:spring-data-tarantool:0.3.1")
+    testImplementation("io.github.selevinia:spring-data-tarantool:0.3.2")
     testImplementation("io.tarantool:cartridge-driver:0.4.3")
     testImplementation("io.projectreactor:reactor-core:3.4.7")
 }
