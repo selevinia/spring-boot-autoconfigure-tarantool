@@ -1,13 +1,13 @@
 package org.springframework.boot.autoconfigure.data.tarantool;
 
-import io.tarantool.driver.ClusterTarantoolClient;
-import io.tarantool.driver.ProxyTarantoolClient;
-import io.tarantool.driver.TarantoolClientConfig;
 import io.tarantool.driver.api.TarantoolClient;
+import io.tarantool.driver.api.TarantoolClientConfig;
 import io.tarantool.driver.api.TarantoolResult;
+import io.tarantool.driver.api.connection.TarantoolConnectionSelectionStrategies;
 import io.tarantool.driver.api.tuple.TarantoolTuple;
 import io.tarantool.driver.auth.SimpleTarantoolCredentials;
-import io.tarantool.driver.core.TarantoolConnectionSelectionStrategies;
+import io.tarantool.driver.core.ClusterTarantoolClient;
+import io.tarantool.driver.core.ProxyTarantoolClient;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
