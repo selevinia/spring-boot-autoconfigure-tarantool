@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.data.tarantool.user.ReactiveUserRe
 import org.springframework.boot.autoconfigure.data.tarantool.user.User;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.ManagedTypes;
 import org.springframework.data.tarantool.core.mapping.TarantoolMappingContext;
 import org.springframework.data.tarantool.repository.ReactiveTarantoolRepository;
 import org.springframework.data.tarantool.repository.config.EnableReactiveTarantoolRepositories;
@@ -25,15 +26,14 @@ public class TarantoolReactiveRepositoriesAutoConfigurationTest {
                     TarantoolReactiveDataAutoConfiguration.class, TarantoolReactiveRepositoriesAutoConfiguration.class));
 
     @Test
-    @SuppressWarnings("unchecked")
     void shouldUseDefaultRepositoryConfiguration() {
         contextRunner.withUserConfiguration(TestConfiguration.class).run((context) -> {
             assertThat(context).hasSingleBean(TarantoolClient.class);
             assertThat(context).hasSingleBean(ReactiveUserRepository.class);
 
             TarantoolMappingContext mappingContext = context.getBean(TarantoolMappingContext.class);
-            Set<? extends Class<?>> entities = (Set<? extends Class<?>>) ReflectionTestUtils.getField(mappingContext, "initialEntitySet");
-            assertThat(entities).hasSize(1);
+            ManagedTypes managedTypes = (ManagedTypes) ReflectionTestUtils.getField(mappingContext, "managedTypes");
+            assertThat(managedTypes.toList()).hasSize(1);
         });
     }
 

@@ -9,12 +9,11 @@ import org.springframework.boot.autoconfigure.data.tarantool.user.User;
 import org.springframework.boot.autoconfigure.data.tarantool.user.UserRepository;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.ManagedTypes;
 import org.springframework.data.tarantool.core.mapping.TarantoolMappingContext;
 import org.springframework.data.tarantool.repository.TarantoolRepository;
 import org.springframework.data.tarantool.repository.config.EnableTarantoolRepositories;
 import org.springframework.test.util.ReflectionTestUtils;
-
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,15 +24,14 @@ public class TarantoolRepositoriesAutoConfigurationTest {
                     TarantoolDataAutoConfiguration.class, TarantoolRepositoriesAutoConfiguration.class));
 
     @Test
-    @SuppressWarnings("unchecked")
     void shouldUseDefaultRepositoryConfiguration() {
         contextRunner.withUserConfiguration(TestConfiguration.class).run((context) -> {
             assertThat(context).hasSingleBean(TarantoolClient.class);
             assertThat(context).hasSingleBean(UserRepository.class);
 
             TarantoolMappingContext mappingContext = context.getBean(TarantoolMappingContext.class);
-            Set<? extends Class<?>> entities = (Set<? extends Class<?>>) ReflectionTestUtils.getField(mappingContext, "initialEntitySet");
-            assertThat(entities).hasSize(1);
+            ManagedTypes managedTypes = (ManagedTypes) ReflectionTestUtils.getField(mappingContext, "managedTypes");
+            assertThat(managedTypes.toList()).hasSize(1);
         });
     }
 

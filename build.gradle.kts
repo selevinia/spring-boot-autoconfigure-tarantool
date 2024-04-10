@@ -1,5 +1,5 @@
 group = "io.github.selevinia"
-version = "0.4.0"
+version = "0.5.0"
 description = "Spring Boot Autoconfigure for Tarantool Database"
 
 plugins {
@@ -13,25 +13,25 @@ repositories {
     mavenCentral()
 }
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
+configure<JavaPluginExtension> {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
-    api("org.springframework.boot:spring-boot-autoconfigure:2.7.18")
+    api("org.springframework.boot:spring-boot-autoconfigure:3.2.4")
 
-    compileOnly("io.github.selevinia:spring-data-tarantool:0.4.0")
+    compileOnly("io.github.selevinia:spring-data-tarantool:0.5.0")
     compileOnly("io.tarantool:cartridge-driver:0.13.0")
     compileOnly("io.projectreactor:reactor-core:3.6.4")
 
-    annotationProcessor("org.springframework.boot:spring-boot-autoconfigure-processor:2.7.18")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:2.7.18")
+    annotationProcessor("org.springframework.boot:spring-boot-autoconfigure-processor:3.2.4")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:3.2.4")
 
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.7.18")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:3.2.4")
     testImplementation("org.junit.jupiter:junit-jupiter:5.10.2")
     testImplementation("org.assertj:assertj-core:3.25.3")
-    testImplementation("io.github.selevinia:spring-data-tarantool:0.4.0")
+    testImplementation("io.github.selevinia:spring-data-tarantool:0.5.0")
     testImplementation("io.tarantool:cartridge-driver:0.13.0")
     testImplementation("io.projectreactor:reactor-core:3.6.4")
 }
